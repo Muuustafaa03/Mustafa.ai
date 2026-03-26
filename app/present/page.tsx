@@ -77,11 +77,32 @@ export default function PresentPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button variant="outline" className="bg-white/5 border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-widest gap-2">
-              <Github size={14} /> Source Code
+            <Button
+              asChild
+              variant="outline"
+              className="bg-white/5 border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-widest gap-2"
+            >
+              <a
+                href="https://github.com/Muuustafaa03/My-Portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github size={14} /> Source Code
+              </a>
             </Button>
-            <Button variant="outline" className="bg-purple-500/10 border-purple-500/20 text-purple-400 hover:bg-purple-500/20 text-[10px] font-bold uppercase tracking-widest gap-2">
-              <ExternalLink size={14} /> Live Staging
+
+            <Button
+              asChild
+              variant="outline"
+              className="bg-purple-500/10 border-purple-500/20 text-purple-400 hover:bg-purple-500/20 text-[10px] font-bold uppercase tracking-widest gap-2"
+            >
+              <a
+                href="https://mustafa-forge.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink size={14} /> Live Staging
+              </a>
             </Button>
           </div>
         </header>

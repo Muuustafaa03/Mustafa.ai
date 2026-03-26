@@ -75,7 +75,7 @@ export default function QuickBooksDeepDive() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="md:col-span-2">
-              <h3 className="text-3xl font-bold mb-6 tracking-tight">How I found the issue.</h3>
+              <h3 className="text-3xl font-bold mb-6 tracking-tight">Importing Data on QuickBooks is Problematic</h3>
               <p className="text-neutral-400 leading-relaxed mb-8 text-lg">
                 While using Discord Webhooks to scan subreddit threads for key action words, I stumbled across a pattern of frustrated users on reddit complaining about Intuit Enterprise Suite (IES) migrations. Users were reporting corrupted data upon import, not realizing that specific fields had a hidden 41-character cap.
               </p>

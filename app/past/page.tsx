@@ -42,7 +42,7 @@ export default function PastPillarHub() {
               </div>
               <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
                 Solved 41-character data truncation in Intuit Enterprise Suite through
-                automated auditing and a custom normalization pipeline.
+                automated auditing.
               </p>
               <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
                 <span>Python</span><span>•</span><span>Automation</span><span>•</span><span>IES</span>
@@ -63,8 +63,7 @@ export default function PastPillarHub() {
                 <ArrowUpRight className="text-neutral-700 group-hover:text-purple-400 transition-colors" />
               </div>
               <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
-                An autonomous AI agent designed to prioritize local hardware constraints while
-                executing complex reasoning tasks via neurosymbolic logic.
+                An autonomous AI agent designed to display tokenization usage.
               </p>
               <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
                 <span>TypeScript</span><span>•</span><span>AI/ML</span><span>•</span><span>Neurosymbolic</span>
@@ -85,8 +84,7 @@ export default function PastPillarHub() {
                 <ArrowUpRight className="text-neutral-700 group-hover:text-emerald-400 transition-colors" />
               </div>
               <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
-                Real-time data visualization engine analyzing move probability and
-                player performance metrics across thousands of historical matches.
+                Chess winrate visualizer.
               </p>
               <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
                 <span>React</span><span>•</span><span>Data Viz</span><span>•</span><span>Analytics</span>

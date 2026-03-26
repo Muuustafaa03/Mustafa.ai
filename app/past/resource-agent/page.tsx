@@ -53,7 +53,7 @@ export default function ResourceAgentDeepDive() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div className="md:col-span-2">
-                            <h3 className="text-3xl font-bold mb-6 tracking-tight">The Problem of AI "Bloat".</h3>
+                            <h3 className="text-3xl font-bold mb-6 tracking-tight">The Problem with AI Agents</h3>
                             <p className="text-neutral-400 leading-relaxed mb-8 text-lg">
                                 Most AI agents assume infinite compute resources, often leading to performance crashes on local hardware. I wanted to build an agent that understands its own environmental constraints—memory, CPU, and latency—before deciding on a reasoning path.
                             </p>

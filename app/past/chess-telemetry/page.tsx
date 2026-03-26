@@ -53,7 +53,7 @@ export default function ChessTelemetryDeepDive() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div className="md:col-span-2">
-                            <h3 className="text-3xl font-bold mb-6 tracking-tight">Pattern in the Chaos.</h3>
+                            <h3 className="text-3xl font-bold mb-6 tracking-tight">Visualizing Chess Winrates Made Easy</h3>
                             <p className="text-neutral-400 leading-relaxed mb-8 text-lg">
                                 Chess engines are great at finding the "best" move, but they are terrible at explaining *why* a player failed. I noticed a gap in player analytics: the inability to visualize emotional "tilt" and time-pressure patterns across thousands of games.
                             </p>
@@ -66,7 +66,7 @@ export default function ChessTelemetryDeepDive() {
                             <div className="p-5 rounded-2xl border border-white/5 bg-white/[0.02]">
                                 <Activity size={20} className="text-emerald-400 mb-3" />
                                 <p className="text-[10px] font-bold uppercase text-neutral-500 mb-2 tracking-widest font-mono">The Purpose</p>
-                                <p className="text-sm text-neutral-300 font-medium leading-relaxed italic">Visualizing player performance bottlenecks.</p>
+                                <p className="text-sm text-neutral-300 font-medium leading-relaxed italic">Visualizing player performance.</p>
                             </div>
                         </div>
                     </div>
