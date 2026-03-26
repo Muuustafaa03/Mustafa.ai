@@ -14,50 +14,97 @@ export default function HomePage() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [futureItems, setFutureItems] = useState<any[]>([]);
   const [presentLogs, setPresentLogs] = useState<any[]>([]);
-  const [currentMission, setCurrentMission] = useState("Looking for problems.");
+  const [displayItems, setDisplayItems] = useState<any[]>([]);
+  const [currentMission, setCurrentMission] = useState("Looking for problems...");
   const [loading, setLoading] = useState(true);
 
   const email = "m.m.stafa2742@gmail.com";
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       setLoading(true);
       try {
+        // ... Fetching Future Items ...
         const { data: future } = await supabase
           .from('marketplace_submissions')
           .select('*')
           .order('votes', { ascending: false })
           .limit(3);
-        if (future) setFutureItems(future);
 
+        // ... Fetching Projects ...
+        const { data: projects } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('status', 'Completed')
+          .order('created_at', { ascending: false })
+          .limit(3);
+
+        // ... Fetching Logs ...
         const { data: logs } = await supabase
           .from('present_logs')
           .select('*')
           .order('created_at', { ascending: false })
           .limit(3);
-        if (logs) setPresentLogs(logs);
 
+        // ... Fetching Mission ...
         const { data: settings } = await supabase
           .from('site_settings')
           .select('current_mission')
           .eq('id', 'global')
           .single();
-        if (settings) setCurrentMission(settings.current_mission);
+
+        if (isMounted) {
+          if (future) setFutureItems(future);
+
+          if (projects && projects.length > 0) {
+            // Map the database results to your specific page routes
+            const mappedProjects = projects.map(project => {
+              const title = project.title.toLowerCase();
+              let slug = project.slug;
+
+              if (title.includes("quickbooks")) slug = "quickbooks";
+              else if (title.includes("resource") || title.includes("agent")) slug = "resource-agent";
+              else if (title.includes("chess")) slug = "chess-telemetry";
+
+              return { ...project, slug };
+            });
+            setDisplayItems(mappedProjects);
+          } else {
+            // Fallback: If DB is empty, use these exact links for your portfolio
+            setDisplayItems([
+              { id: '1', title: "QuickBooks IES Suite", type: "Automation", status: "Live", slug: "quickbooks" },
+              { id: '2', title: "Resource-First AI Agent", type: "AI/ML", status: "Live", slug: "resource-agent" },
+              { id: '3', title: "Chess Telemetry Insights", type: "Analytics", status: "Live", slug: "chess-telemetry" }
+            ]);
+          }
+
+          if (logs) setPresentLogs(logs);
+          if (settings) setCurrentMission(settings.current_mission);
+        }
       } catch (err) {
         console.error("🚨 Sync Fail:", err);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
+
     fetchData();
 
+    // Setup Keyboard Listener
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.shiftKey && e.key === "~") {
         window.location.href = "/terminal";
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    // CLEANUP: One single return to handle everything
+    return () => {
+      isMounted = false;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const handleCopyEmail = async () => {
@@ -75,7 +122,7 @@ export default function HomePage() {
       <div className="relative mx-auto max-w-6xl">
         {/* HERO SECTION */}
         <header className="mb-20">
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-700 fill-mode-both">
             <div className="absolute top-0 right-0 hidden lg:block text-left">
               <div className="rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 flex items-center gap-3">
                 <span className="relative block h-2 w-2 rounded-full bg-emerald-400" />
@@ -91,18 +138,43 @@ export default function HomePage() {
             </p>
 
             <nav className="flex flex-wrap gap-3">
-              {/* RESUME BUTTON WITH ICON */}
-              <Button asChild variant="ghost" size="sm" className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 px-6 py-5 transition-all font-bold tracking-tight">
+              {/* RESUME */}
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:text-white px-6 py-5 transition-all font-bold tracking-tight group"
+              >
                 <a href="/Mustafa_Ahmed_Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                  <FileDown size={16} /> Resume
+                  <FileDown size={18} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
+                  Resume
                 </a>
               </Button>
 
-              <Button asChild variant="ghost" size="sm" className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 px-6 py-5 transition-all font-bold tracking-tight">
-                <a href="https://github.com/Muuustafaa03" target="_blank" rel="noopener noreferrer">GitHub</a>
+              {/* GITHUB */}
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:text-white px-6 py-5 transition-all font-bold tracking-tight group"
+              >
+                <a href="https://github.com/Muuustafaa03" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <Github size={18} className="text-neutral-400 group-hover:text-white transition-colors" />
+                  GitHub
+                </a>
               </Button>
-              <Button asChild variant="ghost" size="sm" className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 px-6 py-5 transition-all font-bold tracking-tight">
-                <a href="https://www.linkedin.com/in/mustafa-mm-ahmed/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+
+              {/* LINKEDIN */}
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:text-white px-6 py-5 transition-all font-bold tracking-tight group"
+              >
+                <a href="https://www.linkedin.com/in/mustafa-mm-ahmed/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <Linkedin size={18} className="text-[#0A66C2] group-hover:text-[#0077b5] transition-colors" />
+                  LinkedIn
+                </a>
               </Button>
 
               {/* EMAIL GROUP WITH SEND OPTION */}
@@ -137,11 +209,12 @@ export default function HomePage() {
                 </button>
               </div>
             </nav>
-          </motion.div>
+          </div>
         </header>
 
         {/* MAJOR PILLARS */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+
           {/* PILLAR: PAST */}
           <div className="group relative min-h-[420px] flex flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden transition-all hover:border-blue-500/20">
             <Link href="/past" className="absolute inset-0 z-0">
@@ -155,13 +228,34 @@ export default function HomePage() {
                 </div>
                 <FileText className="text-neutral-700 group-hover:text-blue-400" size={24} />
               </div>
-              <div className="mt-4 space-y-3 flex-1">
-                <div className="rounded-xl border border-white/5 bg-black/20 p-4">
-                  <p className="text-sm font-bold text-white">QuickBooks IES Suite</p>
-                  <p className="text-[10px] text-neutral-500 font-mono mt-1 uppercase tracking-widest">Flagship Project →</p>
-                </div>
+
+              <div className="mb-6">
+                <p className="text-[11px] text-neutral-400 italic line-clamp-2 leading-relaxed min-h-[32px]">
+                  My 3 most recent projects
+                </p>
               </div>
-              <div className="mt-auto pt-4 border-t border-white/5 flex items-center gap-2 text-[10px] text-neutral-500 font-mono group-hover:text-white transition-colors">
+
+              <div className="space-y-3 flex-1">
+                {displayItems.map((item) => (
+                  <div key={item.id} className="relative z-30 pointer-events-auto">
+                    <Link href={`/past/${item.slug}`} scroll={true}>
+                      <div className="rounded-xl border border-white/5 bg-black/20 p-3 h-[64px] flex flex-col justify-between transition-all hover:bg-white/10 hover:border-blue-500/30 group/project">
+                        <p className="text-sm font-bold text-white group-hover/project:text-blue-400 transition-colors">
+                          {item.title}
+                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-[8px] text-neutral-500 font-mono uppercase tracking-widest">
+                            {item.type} Project →
+                          </p>
+                          <p className="text-[8px] text-blue-500 font-mono uppercase">{item.status}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-white/5 flex items-center gap-2 text-[10px] text-neutral-500 font-mono group-hover:text-white transition-colors">
                 <span className="w-1 h-1 rounded-full bg-blue-500 animate-pulse" /> View Architecture
               </div>
             </div>
@@ -218,9 +312,16 @@ export default function HomePage() {
                 </div>
                 <Sparkles className="text-neutral-700 group-hover:text-emerald-400" size={24} />
               </div>
-              <div className="space-y-3 mt-4 flex-1">
+
+              <div className="mb-6">
+                <p className="text-[11px] text-neutral-400 italic leading-relaxed min-h-[32px]">
+                  The top 3 highest rated ideas
+                </p>
+              </div>
+
+              <div className="space-y-3 flex-1">
                 {futureItems.map((item) => (
-                  <div key={item.id} className="rounded-xl border border-white/5 bg-black/20 p-3">
+                  <div key={item.id} className="rounded-xl border border-white/5 bg-black/20 p-3 h-[64px] flex flex-col justify-between">
                     <p className="text-sm font-bold text-white">{item.concept}</p>
                     <div className="flex justify-between items-center mt-1">
                       <p className="text-[8px] text-neutral-500 font-mono uppercase tracking-widest">{item.status}</p>
@@ -229,7 +330,8 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-auto pt-4 border-t border-white/5 flex items-center gap-2 text-[10px] text-neutral-500 font-mono group-hover:text-white transition-colors">
+
+              <div className="mt-8 pt-4 border-t border-white/5 flex items-center gap-2 text-[10px] text-neutral-500 font-mono group-hover:text-white transition-colors">
                 <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" /> Open Market Proposals
               </div>
             </div>

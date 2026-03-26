@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  ChevronLeft, 
-  Activity, 
-  Zap, 
-  ShieldAlert, 
-  CheckCircle2, 
+import {
+  ChevronLeft,
+  Activity,
+  Zap,
+  ShieldAlert,
+  CheckCircle2,
   History,
   Loader2,
   ExternalLink,
@@ -73,8 +73,7 @@ export default function PresentPage() {
           </div>
           <h1 className="text-6xl lg:text-7xl font-bold tracking-tighter mb-8 italic">The Forge</h1>
           <p className="text-neutral-400 text-xl max-w-2xl leading-relaxed">
-            Currently engineering a <span className="text-white">Full-Stack SaaS Portfolio Ecosystem</span>. 
-            Focusing on real-time data synchronization and hidden administrative protocols.
+            Currently engineering a <span className="text-white">Full-Stack SaaS Portfolio</span>.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -91,15 +90,15 @@ export default function PresentPage() {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 border-y border-white/5 py-12">
           <div className="space-y-3">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 font-mono">Friction</h3>
-            <p className="text-sm font-medium leading-relaxed text-neutral-300">Portfolios are often static snapshots that die the moment they are deployed. I need a living system.</p>
+            <p className="text-sm font-medium leading-relaxed text-neutral-300">I want a portfolio that can showcase my work and promote my brand.</p>
           </div>
           <div className="space-y-3">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 font-mono">Purpose</h3>
-            <p className="text-sm font-medium leading-relaxed text-neutral-300">To demonstrate architectural transparency and real-time problem-solving to potential stakeholders.</p>
+            <p className="text-sm font-medium leading-relaxed text-neutral-300">To demonstrate problem solving skills and grow a community.</p>
           </div>
           <div className="space-y-3">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 font-mono">Discovery</h3>
-            <p className="text-sm font-medium leading-relaxed text-neutral-300">Building a hidden 'Ghost' dashboard significantly improves content velocity without sacrificing UI purity.</p>
+            <p className="text-sm font-medium leading-relaxed text-neutral-300">Having a good landing page is the first step is connecting with audiences.</p>
           </div>
         </section>
 
@@ -135,11 +134,11 @@ export default function PresentPage() {
                         {log.type}
                       </div>
                     </div>
-                    
+
                     <h4 className="text-xl font-bold tracking-tight text-white group-hover:text-purple-400 transition-colors">
                       {log.title}
                     </h4>
-                    
+
                     <p className="text-neutral-500 text-sm leading-relaxed max-w-2xl font-medium">
                       {log.content}
                     </p>

@@ -13,8 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mustafa Ahmed | Software Engineer",
-  description: "Software Engineer specializing in AI-First solutions and Micro-SaaS. Microsoft TPM and Capital One SWE Alum.",
+  title: {
+    default: "Mustafa.ai",
+    template: "%s | Mustafa.ai",
+  },
+  description: "AI-First Solutions & Micro-SaaS Engineering",
+  icons: {
+    // Adding 'shortcut' helps older browsers and specifically clears caches
+    shortcut: "/favicon.ico?v=1",
+    apple: "/apple-touch-icon.png?v=1",
+    icon: [
+      { url: "/favicon-32x32.png?v=1", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png?v=1", sizes: "16x16", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({

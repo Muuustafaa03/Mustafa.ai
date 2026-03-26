@@ -28,6 +28,7 @@ export default function PastPillarHub() {
         </header>
 
         <div className="grid grid-cols-1 gap-4">
+          {/* PROJECT 1: QUICKBOOKS */}
           <Link href="/past/quickbooks">
             <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
               <div className="flex justify-between items-start mb-4">
@@ -44,11 +45,51 @@ export default function PastPillarHub() {
                 automated auditing and a custom normalization pipeline.
               </p>
               <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
-                <span>Python</span>
-                <span>•</span>
-                <span>Automation</span>
-                <span>•</span>
-                <span>IES</span>
+                <span>Python</span><span>•</span><span>Automation</span><span>•</span><span>IES</span>
+              </div>
+            </div>
+          </Link>
+
+          {/* PROJECT 2: RESOURCE FIRST AGENT */}
+          <Link href="/past/resource-agent">
+            <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400">
+                    <Folder size={20} />
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight">Resource-First AI Agent</h3>
+                </div>
+                <ArrowUpRight className="text-neutral-700 group-hover:text-purple-400 transition-colors" />
+              </div>
+              <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
+                An autonomous AI agent designed to prioritize local hardware constraints while
+                executing complex reasoning tasks via neurosymbolic logic.
+              </p>
+              <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                <span>TypeScript</span><span>•</span><span>AI/ML</span><span>•</span><span>Neurosymbolic</span>
+              </div>
+            </div>
+          </Link>
+
+          {/* PROJECT 3: CHESS TELEMETRY */}
+          <Link href="/past/chess-telemetry">
+            <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+                    <Folder size={20} />
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight">Chess Telemetry Insights</h3>
+                </div>
+                <ArrowUpRight className="text-neutral-700 group-hover:text-emerald-400 transition-colors" />
+              </div>
+              <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
+                Real-time data visualization engine analyzing move probability and
+                player performance metrics across thousands of historical matches.
+              </p>
+              <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                <span>React</span><span>•</span><span>Data Viz</span><span>•</span><span>Analytics</span>
               </div>
             </div>
           </Link>
