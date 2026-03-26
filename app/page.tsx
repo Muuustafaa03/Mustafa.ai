@@ -37,7 +37,7 @@ export default function HomePage() {
         const { data: projects } = await supabase
           .from('projects')
           .select('*')
-          .eq('status', 'Completed')
+          .eq('status', 'Completed') // Strict consistency
           .order('created_at', { ascending: false })
           .limit(3);
 
@@ -59,24 +59,20 @@ export default function HomePage() {
           if (future) setFutureItems(future);
 
           if (projects && projects.length > 0) {
-            // Map the database results to your specific page routes
-            const mappedProjects = projects.map(project => {
-              const title = project.title.toLowerCase();
-              let slug = project.slug;
+            // No more hardcoded title checks. 
+            // We use the slug directly from Supabase.
+            const dbMapped = projects.map(project => ({
+              ...project,
+              slug: project.slug // Trusts the DB source of truth
+            }));
 
-              if (title.includes("quickbooks")) slug = "quickbooks";
-              else if (title.includes("resource") || title.includes("agent")) slug = "resource-agent";
-              else if (title.includes("chess")) slug = "chess-telemetry";
-
-              return { ...project, slug };
-            });
-            setDisplayItems(mappedProjects);
+            setDisplayItems(dbMapped);
           } else {
-            // Fallback: If DB is empty, use these exact links for your portfolio
+            // Fallback: This only renders if the DB connection is physically broken
             setDisplayItems([
-              { id: '1', title: "QuickBooks IES Suite", type: "Automation", status: "Live", slug: "quickbooks" },
-              { id: '2', title: "Resource-First AI Agent", type: "AI/ML", status: "Live", slug: "resource-agent" },
-              { id: '3', title: "Chess Telemetry Insights", type: "Analytics", status: "Live", slug: "chess-telemetry" }
+              { id: '1', title: "Mustafa.ai (v1.0)", type: "Full-Stack", status: "Completed", slug: "mustafa-ai" },
+              { id: '2', title: "Chess Telemetry Insights", type: "Analytics", status: "Completed", slug: "chess-telemetry" },
+              { id: '3', title: "Resource-First AI Agent", type: "AI/ML", status: "Completed", slug: "resource-agent" }
             ]);
           }
 

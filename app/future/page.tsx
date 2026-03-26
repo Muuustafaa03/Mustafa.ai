@@ -114,7 +114,7 @@ export default function MarketplacePage() {
             <Sparkles size={18} />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] font-mono">Future Systems</span>
           </div>
-          <h1 className="text-6xl lg:text-7xl font-bold tracking-tighter mb-8">The Marketplace</h1>
+          <h1 className="text-6xl lg:text-7xl font-bold tracking-tighter mb-8">The Market</h1>
           <p className="text-neutral-400 text-xl max-w-2xl leading-relaxed italic">
             I engineer solutions for high-value problems. Submit a business problem, an automation request, or a Micro-SaaS concept.
           </p>
