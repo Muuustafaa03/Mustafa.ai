@@ -68,11 +68,10 @@ export default function HomePage() {
 
             setDisplayItems(dbMapped);
           } else {
-            // Fallback: This only renders if the DB connection is physically broken
             setDisplayItems([
               { id: '1', title: "Mustafa.ai (v1.0)", type: "Full-Stack", status: "Completed", slug: "mustafa-ai" },
-              { id: '2', title: "Chess Telemetry Insights", type: "Analytics", status: "Completed", slug: "chess-telemetry" },
-              { id: '3', title: "Resource-First AI Agent", type: "AI/ML", status: "Completed", slug: "resource-agent" }
+              { id: '2', title: "QuickBooks IES Suite", type: "Automation", status: "Completed", slug: "quickbooks" },
+              { id: '3', title: "New Project Loading...", type: "NextGen AI", status: "In Progress", slug: "upcoming" }
             ]);
           }
 
@@ -128,9 +127,8 @@ export default function HomePage() {
 
             <h1 className="text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[0.9]">Mustafa Ahmed</h1>
 
-            <p className="text-neutral-500 text-xl lg:text-2xl max-w-2xl leading-relaxed mb-12 font-medium italic">
-              Software Engineer specializing in <span className="text-white font-semibold text-nowrap">AI-First solutions</span> and <span className="text-white font-semibold text-nowrap">Micro-SaaS</span>.
-              Microsoft TPM and Capital One SWE Alum. I find problems and engineer the fix.
+            <p className="text-neutral-500 text-xl lg:text-2xl max-w-2xl leading-relaxed mb-12 font-medium italic text-left">
+              <span className="text-white font-semibold text-nowrap">Product Builder</span> with a passion for <span className="text-white font-semibold text-nowrap">shipping in public</span> and <span className="text-white font-semibold text-nowrap">creating something from nothing</span>.
             </p>
 
             <nav className="flex flex-wrap gap-3">

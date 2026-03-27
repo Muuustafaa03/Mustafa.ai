@@ -4,6 +4,10 @@ import React from "react";
 import Link from "next/link";
 import { ChevronLeft, Terminal, ShieldAlert, Zap, Github, ExternalLink, Search, MessageSquareQuote, Cpu, Database, Layout } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+    Lightbulb,
+    Image as ImageIcon
+} from "lucide-react";
 
 export default function PortfolioDeepDive() {
     return (
@@ -38,6 +42,11 @@ export default function PortfolioDeepDive() {
                         <Button asChild className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 text-sm font-bold px-6 py-6 transition-all">
                             <a href="https://mustafa-forge.vercel.app/" target="_blank"><ExternalLink size={18} className="mr-2 text-blue-400" /> Live Demo</a>
                         </Button>
+                        <Button asChild className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 text-sm font-bold tracking-tight tracking-tight px-6 py-6 transition-all">
+                            <Link href="/gallery">
+                                <ImageIcon size={18} className="mr-2 text-orange-400" /> View Gallery
+                            </Link>
+                        </Button>
                     </div>
                 </header>
 
@@ -48,13 +57,13 @@ export default function PortfolioDeepDive() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div className="md:col-span-2">
-                            <h3 className="text-3xl font-bold mb-6 tracking-tight">The "Dead Portfolio" Problem</h3>
+                            <h3 className="text-3xl font-bold mb-6 tracking-tight">A Portfolio to Complete Two Objectives</h3>
                             <p className="text-neutral-400 leading-relaxed mb-8 text-lg">
-                                Most professional sites are static resumes that go out of date the moment they are pushed. I wanted to build a "Living System"—a site that feels like a real-time OS, capable of displaying current mission objectives and system logs directly from a cloud database.
+                                I wanted my portfolio to not only showcase my work, but also be a living website where I can post updates and stay connected with a potential audience.
                             </p>
                             <div className="p-8 rounded-2xl bg-white/[0.03] border border-white/10 italic text-neutral-300 leading-relaxed relative">
                                 <MessageSquareQuote size={24} className="mb-4 text-cyan-500/50" />
-                                This isn't just a website; it's a dashboard for my professional trajectory. The goal was to minimize the friction between "doing work" and "showing work."
+                                Instead of making just a website, I've made a dashboard for my career. I've bridged the gap between "doing work" and "showing work".
                             </div>
                         </div>
                         <div className="space-y-6">
@@ -73,7 +82,7 @@ export default function PortfolioDeepDive() {
                             <ShieldAlert size={16} className="text-red-500/80" /> The Friction
                         </h3>
                         <p className="text-neutral-500 text-sm leading-relaxed">
-                            Handling asynchronous data fetching in a clean, minimalist UI often leads to "layout shift" or jarring loading states. I needed a way to hydrate the UI instantly while Supabase synced in the background.
+                            Combining a UI that draws users in with real time data fetching in a clean, minimalist way.
                         </p>
                     </section>
                     <section className="p-8 rounded-2xl border border-white/5 bg-white/[0.01]">
@@ -81,7 +90,7 @@ export default function PortfolioDeepDive() {
                             <Zap size={16} className="text-cyan-400/80" /> The Solve
                         </h3>
                         <p className="text-neutral-500 text-sm leading-relaxed">
-                            Implemented a robust mounting logic using React's useEffect and mounting states, ensuring that "The Forge" and "The Archive" always have fallback data ready to render immediately.
+                            Implemented a live dashboard that turns my credentials into a real-time feed, combining clean design with a database that updates as I work.
                         </p>
                     </section>
                 </div>

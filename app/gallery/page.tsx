@@ -10,8 +10,15 @@ const galleryItems = [
     title: "QuickBooks IES Auditor",
     description: "The core Streamlit interface used to validate 41-character constraints across thousands of rows.",
     projectLink: "/past/quickbooks",
-    image: "/images/qb-auditor-main.png", 
+    image: "/images/qb-auditor-main.png",
     tag: "Tool Interface"
+  },
+  {
+    title: "Hidden Terminal Interface",
+    description: "A functional command-line overlay built into the portfolio for updating portfolio in real time.",
+    projectLink: "/past/mustafa-ai", // Points back to the main portfolio case study
+    image: "/images/terminal-screenshot.png",
+    tag: "System Core"
   },
   // Add more items here...
 ];
@@ -25,17 +32,17 @@ export default function GalleryPage() {
 
       {/* LIGHTBOX MODAL */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 cursor-zoom-out"
           onClick={() => setSelectedImage(null)}
         >
           <button className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
             <X size={32} />
           </button>
-          <img 
-            src={selectedImage} 
+          <img
+            src={selectedImage}
             className="max-w-full max-h-[85vh] rounded-lg shadow-2xl border border-white/10 object-contain"
-            alt="Full view" 
+            alt="Full view"
           />
         </div>
       )}
@@ -68,15 +75,15 @@ export default function GalleryPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {galleryItems.map((item, idx) => (
             <div key={idx} className="group flex flex-col space-y-6">
-              
+
               {/* IMAGE CONTAINER (Lightbox Trigger) */}
-              <div 
+              <div
                 className="relative aspect-video w-full rounded-2xl border border-white/10 bg-white/5 overflow-hidden transition-all group-hover:border-orange-500/40 cursor-zoom-in"
                 onClick={() => setSelectedImage(item.image)}
               >
                 {/* REAL IMAGE TAG */}
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-[1.02]"
                   onError={(e) => {
@@ -84,12 +91,12 @@ export default function GalleryPage() {
                     e.currentTarget.src = "https://placehold.co/600x400/000000/FFFFFF/png?text=Image+Not+Found";
                   }}
                 />
-                
+
                 <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-black/80 backdrop-blur-md rounded-full text-[9px] font-bold uppercase tracking-widest text-orange-400 border border-orange-500/20">
                   {item.tag}
                 </div>
               </div>
-              
+
               {/* TEXT CONTENT (Project Navigation) */}
               <div className="px-2 text-left">
                 <Link href={item.projectLink} className="inline-flex items-center group/title">
@@ -107,7 +114,7 @@ export default function GalleryPage() {
         </div>
 
         <footer className="mt-40 border-t border-white/5 pt-10 text-center">
-            <p className="text-neutral-900 text-[9px] font-mono uppercase tracking-[1em]">Visualization Module v1.0</p>
+          <p className="text-neutral-900 text-[9px] font-mono uppercase tracking-[1em]">Visualization Module v1.0</p>
         </footer>
       </div>
     </main>
