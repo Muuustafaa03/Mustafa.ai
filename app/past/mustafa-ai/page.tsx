@@ -66,11 +66,24 @@ export default function PortfolioDeepDive() {
                                 Instead of making just a website, I've made a dashboard for my career. I've bridged the gap between "doing work" and "showing work".
                             </div>
                         </div>
-                        <div className="space-y-6">
-                            <div className="p-5 rounded-2xl border border-white/5 bg-white/[0.02]">
-                                <Cpu size={20} className="text-cyan-400 mb-3" />
-                                <p className="text-[10px] font-bold uppercase text-neutral-500 mb-2 tracking-widest font-mono">The Purpose</p>
-                                <p className="text-sm text-neutral-300 font-medium leading-relaxed italic">Real-time career telemetry.</p>
+                        {/* THE NUDGE: Outer wrapper to shift the entire card right */}
+                        <div className="w-full pl-3 sm:pl-0">
+                            <div className="w-full p-6 rounded-2xl border border-white/5 bg-white/[0.02] box-border relative">
+                                <div className="flex flex-col gap-3">
+
+                                    {/* Header: Icon + Title Grouped */}
+                                    <div className="flex items-center gap-3">
+                                        <Cpu size={20} className="text-cyan-400" />
+                                        <p className="text-[10px] font-bold uppercase text-neutral-500 tracking-widest font-mono">
+                                            The Purpose
+                                        </p>
+                                    </div>
+
+                                    {/* Body: Flush under the Cpu symbol */}
+                                    <p className="text-sm text-neutral-300 font-medium leading-relaxed italic">
+                                        Real-time career telemetry.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

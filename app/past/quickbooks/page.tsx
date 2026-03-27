@@ -85,10 +85,25 @@ export default function QuickBooksDeepDive() {
               </div>
             </div>
             <div className="space-y-6">
-              <div className="p-5 rounded-2xl border border-white/5 bg-white/[0.02]">
-                <Lightbulb size={20} className="text-yellow-500/80 mb-3" />
-                <p className="text-[10px] font-bold uppercase text-neutral-500 mb-2 tracking-widest font-mono">The Purpose</p>
-                <p className="text-sm text-neutral-300 font-medium leading-relaxed italic">Preventing data loss in enterprise migrations.</p>
+              {/* QUICKBOOKS PURPOSE BLOCK: Applied Same Structural Nudge */}
+              <div className="w-full pl-2 sm:pl-0">
+                <div className="w-full p-6 rounded-2xl border border-white/5 bg-white/[0.02] box-border relative">
+                  <div className="flex flex-col gap-3">
+
+                    {/* Header: Icon + Title Grouped */}
+                    <div className="flex items-center gap-3">
+                      <Lightbulb size={20} className="text-yellow-500/80" />
+                      <p className="text-[10px] font-bold uppercase text-neutral-500 tracking-widest font-mono">
+                        The Purpose
+                      </p>
+                    </div>
+
+                    {/* Body: Flush under the Lightbulb symbol */}
+                    <p className="text-sm text-neutral-300 font-medium leading-relaxed italic">
+                      Preventing data loss in enterprise migrations.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

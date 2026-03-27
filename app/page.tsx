@@ -257,22 +257,27 @@ export default function HomePage() {
 
           {/* PILLAR: PRESENT */}
           <div className="group relative min-h-[420px] flex flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden transition-all hover:border-purple-500/20">
-            <Link href="/present" className="absolute inset-0 z-0">
+            {/* The Link - Ensure z-index is high enough to catch everything */}
+            <Link href="/present" className="absolute inset-0 z-30">
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
-            <div className="relative z-20 flex-1 p-8 flex flex-col pointer-events-none">
+
+            {/* Content Container - Set to z-20 so it sits under the link */}
+            <div className="relative z-20 flex-1 p-8 flex flex-col">
               <div className="flex justify-between items-start mb-6">
-                <div className="pointer-events-auto">
+                <div>
                   <p className="text-[10px] uppercase tracking-[0.2em] text-purple-400 font-bold mb-2">Pillar • Present</p>
                   <h2 className="text-3xl font-bold tracking-tight text-white">The Forge</h2>
                 </div>
                 <Activity className="text-neutral-700 group-hover:text-purple-400" size={24} />
               </div>
-              <div className="mb-6 pointer-events-auto">
+
+              <div className="mb-6">
                 <p className="text-[11px] text-neutral-400 italic line-clamp-2 leading-relaxed min-h-[32px]">
                   {currentMission}
                 </p>
               </div>
+
               <div className="space-y-3 flex-1">
                 {presentLogs.map((log) => (
                   <div key={log.id} className="rounded-xl border border-white/5 bg-black/40 p-3 h-[64px] flex flex-col justify-between">
@@ -287,6 +292,7 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+
               <div className="mt-8 pt-4 border-t border-white/5 flex items-center gap-2 text-[10px] text-neutral-500 font-mono group-hover:text-white transition-colors">
                 <span className="w-1 h-1 rounded-full bg-purple-500 animate-pulse" /> View Full Build History
               </div>
