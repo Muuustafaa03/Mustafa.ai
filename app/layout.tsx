@@ -17,15 +17,37 @@ export const metadata: Metadata = {
     default: "Mustafa.ai",
     template: "%s | Mustafa.ai",
   },
-  description: "AI-First Solutions & Micro-SaaS Engineering",
+  description: "Mustafa.ai | Product Builder with a passion for shipping in public and creating something from nothing. Exploring the intersection of reactive systems and AI.",
+  metadataBase: new URL("https://mustafa-forge.vercel.app"),
   icons: {
-    // Adding 'shortcut' helps older browsers and specifically clears caches
     shortcut: "/favicon.ico?v=1",
     apple: "/apple-touch-icon.png?v=1",
     icon: [
       { url: "/favicon-32x32.png?v=1", sizes: "32x32", type: "image/png" },
       { url: "/favicon-16x16.png?v=1", sizes: "16x16", type: "image/png" },
     ],
+  },
+  openGraph: {
+    title: "Mustafa.ai",
+    description: "Product Builder with a passion for shipping in public and creating something from nothing.",
+    url: "https://mustafa-forge.vercel.app",
+    siteName: "Mustafa.ai",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mustafa.ai - Next.js and Supabase Product Builder",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mustafa.ai",
+    description: "Product Builder shipping in public.",
+    images: ["/og.jpg"],
   },
 };
 
