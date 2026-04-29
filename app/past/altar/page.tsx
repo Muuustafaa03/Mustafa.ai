@@ -54,7 +54,7 @@ export default function AltarDeepDive() {
               </a>
             </Button>
             <Button asChild className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 text-sm font-bold tracking-tight px-6 py-6 transition-all">
-              <a href="https://mustafa-forge.vercel.app" target="_blank" rel="noopener noreferrer">
+              <a href="https://altar-focus.vercel.app/" target="_blank" rel="noopener noreferrer">
                 <ExternalLink size={18} className="mr-2 text-cyan-400" /> Live Demo
               </a>
             </Button>
