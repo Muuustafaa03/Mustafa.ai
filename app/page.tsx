@@ -19,6 +19,13 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   const email = "m.m.stafa2742@gmail.com";
+  const altarProject = {
+    id: "altar",
+    title: "Altar",
+    type: "Focus Ritual",
+    status: "Completed",
+    slug: "altar",
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -65,13 +72,19 @@ export default function HomePage() {
               ...project,
               slug: project.slug // Trusts the DB source of truth
             }));
+            const hasAltar = dbMapped.some(
+              (project) => project.slug === "altar" || project.title?.toLowerCase() === "altar"
+            );
+            const curatedProjects = hasAltar
+              ? dbMapped
+              : [altarProject, ...dbMapped].slice(0, 3);
 
-            setDisplayItems(dbMapped);
+            setDisplayItems(curatedProjects);
           } else {
             setDisplayItems([
+              altarProject,
               { id: '1', title: "Mustafa.ai (v1.0)", type: "Full-Stack", status: "Completed", slug: "mustafa-ai" },
-              { id: '2', title: "QuickBooks IES Suite", type: "Automation", status: "Completed", slug: "quickbooks" },
-              { id: '3', title: "New Project Loading...", type: "NextGen AI", status: "In Progress", slug: "upcoming" }
+              { id: '2', title: "QuickBooks IES Suite", type: "Automation", status: "Completed", slug: "quickbooks" }
             ]);
           }
 

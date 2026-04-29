@@ -28,6 +28,28 @@ export default function PastPillarHub() {
         </header>
 
         <div className="grid grid-cols-1 gap-4">
+          {/* 0. ALTAR (NEW) */}
+          <Link href="/past/altar">
+            <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-violet-500/10 text-violet-400">
+                    <Folder size={20} />
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight text-white">Altar</h3>
+                </div>
+                <ArrowUpRight className="text-neutral-700 group-hover:text-violet-400 transition-colors" />
+              </div>
+              <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
+                A minimalist focus ritual app that facilitates digital sacrifices to reclaim
+                deep work time. Built using the Mustafa-Engine.
+              </p>
+              <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                <span>Lovable</span><span>•</span><span>Cursor</span><span>•</span><span>Supabase</span>
+              </div>
+            </div>
+          </Link>
+
           {/* 1. THE PORTFOLIO (NEWEST) */}
           <Link href="/past/mustafa-ai">
             <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
