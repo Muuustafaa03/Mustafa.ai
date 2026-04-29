@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import { ideaDisplayTitle } from "@/lib/marketplace";
 import { Terminal, Send, Trash2, RefreshCcw, LogOut, Loader2, Check, Globe } from "lucide-react";
 
 export default function ControlCenter() {
@@ -29,7 +30,11 @@ export default function ControlCenter() {
         setLoading(true);
 
         // Fetch Future Concepts
-        const { data: future } = await supabase.from('marketplace_submissions').select('*').order('created_at', { ascending: false });
+        const { data: future } = await supabase
+            .from('marketplace_submissions')
+            .select('*')
+            .order('votes', { ascending: false })
+            .order('created_at', { ascending: false });
 
         // Fetch Present Logs
         const { data: logs } = await supabase.from('present_logs').select('*').order('created_at', { ascending: false }).limit(5);
@@ -253,9 +258,10 @@ export default function ControlCenter() {
                         <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
                             {futureItems.length === 0 && <p className="text-neutral-700 text-[10px] uppercase italic">Backlog is currently empty.</p>}
                             {futureItems.map(item => (
-                                <div key={item.id} className="flex items-center justify-between p-4 bg-neutral-900/30 border border-white/5 rounded-lg">
-                                    <div className="space-y-2">
-                                        <p className="text-xs font-bold text-white uppercase tracking-tight">{item.concept}</p>
+                                <div key={item.id} className="flex items-start justify-between gap-3 p-4 bg-neutral-900/30 border border-white/5 rounded-lg">
+                                    <div className="space-y-2 min-w-0 flex-1">
+                                        <p className="text-xs font-bold text-white tracking-tight">{ideaDisplayTitle(item)}</p>
+                                        <p className="text-[10px] text-neutral-500 leading-relaxed break-words whitespace-normal">{item.concept}</p>
                                         <div className="flex items-center gap-3">
                                             <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded border ${item.status === 'Completed' ? 'border-blue-500/30 text-blue-400' :
                                                 item.status === 'In Development' ? 'border-emerald-500/30 text-emerald-400' :

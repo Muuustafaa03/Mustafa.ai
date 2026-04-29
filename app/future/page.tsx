@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
+import { ideaDisplayTitle } from "@/lib/marketplace";
 
 export default function MarketplacePage() {
   const [submitted, setSubmitted] = useState(false);
@@ -29,6 +30,7 @@ export default function MarketplacePage() {
       const { data, error } = await supabase
         .from('marketplace_submissions')
         .select('*')
+        .order('votes', { ascending: false })
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -46,7 +48,11 @@ export default function MarketplacePage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    const title = (formData.get('title') as string)?.trim();
+    if (!title) return;
+
     const submission = {
+      title,
       alias: formData.get('alias') as string,
       contact: formData.get('contact') as string,
       concept: formData.get('concept') as string,
@@ -127,6 +133,10 @@ export default function MarketplacePage() {
             <h2 className="text-sm font-bold uppercase tracking-[0.2em] font-mono mb-8 text-neutral-400">Upload Idea</h2>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
+              <div className="space-y-2">
+                <label className="text-[9px] uppercase font-bold text-neutral-600 font-mono tracking-widest px-1">Idea title / name *</label>
+                <input name="title" type="text" required maxLength={200} className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-all" placeholder="Short name for this idea" />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[9px] uppercase font-bold text-neutral-600 font-mono tracking-widest px-1">Identity / Alias (Optional)</label>
@@ -185,20 +195,23 @@ export default function MarketplacePage() {
               submissions.map((item) => {
                 const userHasVoted = typeof window !== 'undefined' && localStorage.getItem(`voted_${item.id}`);
                 return (
-                  <div key={item.id} className="group flex items-center justify-between p-7 rounded-xl border border-white/5 bg-white/[0.01] hover:border-emerald-500/20 transition-all duration-300">
-                    <div className="text-left pr-4">
-                      <div className="flex items-center gap-3 mb-2 flex-wrap">
+                  <div key={item.id} className="group flex items-start justify-between gap-4 p-7 rounded-xl border border-white/5 bg-white/[0.01] hover:border-emerald-500/20 transition-all duration-300">
+                    <div className="text-left pr-2 min-w-0 flex-1">
+                      <div className="flex items-start gap-3 mb-2 flex-wrap">
                         <h3 className="font-bold text-xl tracking-tight text-white">
-                          {item.concept.length > 60 ? item.concept.substring(0, 60) + "..." : item.concept}
+                          {ideaDisplayTitle(item)}
                         </h3>
-                        <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest ${item.status === 'Completed' ? 'bg-blue-500/10 text-blue-400' :
+                        <span className={`shrink-0 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest ${item.status === 'Completed' ? 'bg-blue-500/10 text-blue-400' :
                           item.status === 'In Development' ? 'bg-emerald-500/10 text-emerald-500' :
                             'bg-yellow-500/10 text-yellow-500'
                           }`}>
                           {item.status}
                         </span>
                       </div>
-                      <p className="text-sm text-neutral-500 font-medium italic">Submitted by: {item.alias || "Anonymous"}</p>
+                      <p className="text-sm text-neutral-400 font-medium leading-relaxed break-words whitespace-normal">
+                        {item.concept}
+                      </p>
+                      <p className="mt-3 text-sm text-neutral-500 font-medium italic">Submitted by: {item.alias || "Anonymous"}</p>
                     </div>
 
                     <button

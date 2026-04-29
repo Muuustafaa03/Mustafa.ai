@@ -20,10 +20,11 @@ serve(async (req: Request) => {
             body: JSON.stringify({
                 from: 'Portfolio <onboarding@resend.dev>',
                 to: ['m.m.stafa2742@gmail.com'],
-                subject: `New Idea: ${record?.concept?.substring(0, 30) || 'New Submission'}...`,
+                subject: `New Idea: ${record?.title?.trim() || record?.concept?.substring(0, 40) || 'New Submission'}`,
                 html: `
                     <div style="font-family: sans-serif; line-height: 1.5; color: #333; max-width: 600px; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
                         <h2 style="color: #06b6d4;">💡 New Idea Submitted</h2>
+                        <p style="margin: 5px 0;"><strong>Title:</strong> ${record?.title || 'N/A'}</p>
                         <p style="margin: 5px 0;"><strong>Alias:</strong> ${record?.alias || 'N/A'}</p>
                         <p style="margin: 5px 0;"><strong>Contact:</strong> ${record?.contact || 'N/A'}</p>
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />

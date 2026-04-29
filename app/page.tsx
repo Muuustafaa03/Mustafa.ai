@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
+import { ideaDisplayTitle } from "@/lib/marketplace";
 
 export default function HomePage() {
   const [emailCopied, setEmailCopied] = useState(false);
@@ -38,6 +39,7 @@ export default function HomePage() {
           .from('marketplace_submissions')
           .select('*')
           .order('votes', { ascending: false })
+          .order('created_at', { ascending: false })
           .limit(3);
 
         // ... Fetching Projects ...
@@ -334,12 +336,16 @@ export default function HomePage() {
 
               <div className="space-y-3 flex-1">
                 {futureItems.map((item) => (
-                  <div key={item.id} className="rounded-xl border border-white/5 bg-black/20 p-3 h-[64px] flex flex-col justify-between">
-                    <p className="text-sm font-bold text-white">{item.concept}</p>
-                    <div className="flex justify-between items-center mt-1">
-                      <p className="text-[8px] text-neutral-500 font-mono uppercase tracking-widest">{item.status}</p>
-                      <p className="text-[8px] text-emerald-500 font-mono">↑ {item.votes}</p>
-                    </div>
+                  <div
+                    key={item.id}
+                    className="rounded-xl border border-white/5 bg-black/20 p-3 flex items-start justify-between gap-3 min-h-[52px]"
+                  >
+                    <p className="text-sm font-bold text-white leading-snug line-clamp-2 min-w-0">
+                      {ideaDisplayTitle(item)}
+                    </p>
+                    <p className="text-[8px] text-emerald-500 font-mono shrink-0 pt-0.5">
+                      ↑ {item.votes ?? 0}
+                    </p>
                   </div>
                 ))}
               </div>
