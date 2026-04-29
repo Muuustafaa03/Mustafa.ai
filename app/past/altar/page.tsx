@@ -114,7 +114,7 @@ export default function AltarDeepDive() {
               <Zap size={16} className="text-violet-400/80" /> The Solve
             </h3>
             <p className="text-neutral-500 text-sm leading-relaxed">
-              A ritualized interaction model: choose a distraction, lock a duration, then enter an active focus state. Built using the Mustafa-Engine (Lovable + Cursor + Supabase).
+              A ritualized interaction model: choose a distraction, lock a duration, then enter an active focus state.
             </p>
           </section>
         </div>
@@ -129,7 +129,7 @@ export default function AltarDeepDive() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
             {[
-              { label: "Engine", value: "Mustafa-Engine" },
+              { label: "Framework", value: "TanStack Start + React" },
               { label: "Builder Stack", value: "Lovable + Cursor" },
               { label: "Data Layer", value: "Supabase" },
               { label: "Core Loop", value: "Timed Sacrifice" },
