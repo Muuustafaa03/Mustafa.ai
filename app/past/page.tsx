@@ -42,7 +42,7 @@ export default function PastPillarHub() {
               </div>
               <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
                 A minimalist focus ritual app that facilitates digital sacrifices to reclaim
-                deep work time. Built using the Mustafa-Engine.
+                deep work time.
               </p>
               <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
                 <span>Lovable</span><span>•</span><span>Cursor</span><span>•</span><span>Supabase</span>
