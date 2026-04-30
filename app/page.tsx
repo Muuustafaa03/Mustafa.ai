@@ -338,14 +338,19 @@ export default function HomePage() {
                 {futureItems.map((item) => (
                   <div
                     key={item.id}
-                    className="rounded-xl border border-white/5 bg-black/20 p-3 flex items-start justify-between gap-3 min-h-[52px]"
+                    className="rounded-xl border border-white/5 bg-black/20 p-3 h-[64px] flex flex-col justify-between"
                   >
-                    <p className="text-sm font-bold text-white leading-snug line-clamp-2 min-w-0">
+                    <p className="text-sm font-bold text-white truncate min-w-0">
                       {ideaDisplayTitle(item)}
                     </p>
-                    <p className="text-[8px] text-emerald-500 font-mono shrink-0 pt-0.5">
-                      ↑ {item.votes ?? 0}
-                    </p>
+                    <div className="flex justify-between items-center mt-1">
+                      <p className="text-[8px] text-neutral-500 font-mono uppercase tracking-widest">
+                        ↑ {item.votes ?? 0}
+                      </p>
+                      <p className="text-[8px] text-emerald-500 font-mono uppercase">
+                        {item.status}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
