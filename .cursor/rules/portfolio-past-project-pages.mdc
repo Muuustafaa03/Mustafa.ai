@@ -47,5 +47,7 @@ For a **new** project, pick an unused hue (e.g. **rose**, **orange**, **fuchsia*
 
 The three cards follow **recency**, not a permanent “flagship.” **Newest completed project first.**
 
+The small status label on each card (bottom right) should read **`Completed`** for every project in this pillar—including shipped apps that still have a live URL—so the Archive reads consistently.
+
 - **With Supabase:** `app/page.tsx` uses whatever `projects` returns, already ordered by `created_at` descending—**do not** hardcode a slug to slot 0.
 - **Empty DB fallback:** `pastPillarFallbackByRecency` in `app/page.tsx` is a **manually maintained newest-first** list; when you ship something newer than Orbit, **put that entry first** in the array.

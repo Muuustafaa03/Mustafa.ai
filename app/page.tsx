@@ -32,7 +32,7 @@ export default function HomePage() {
     id: "orbit",
     title: "Orbit",
     type: "Spatial Tasks",
-    status: "Live",
+    status: "Completed",
     slug: "orbit",
   };
 
