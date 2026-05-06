@@ -44,6 +44,27 @@ const gallerySections = [
       },
     ]
   },
+  {
+    title: "Orbit",
+    items: [
+      {
+        title: "Constellation view",
+        description:
+          "The spatial canvas: tasks as planets on spokes, workflow rings, and sun-centered progress.",
+        projectLink: "/past/orbit",
+        image: "/images/constellation.png",
+        tag: "3D board",
+      },
+      {
+        title: "List view",
+        description:
+          "Dense task list with priorities and due phrases—same project, alternate read when you want rows.",
+        projectLink: "/past/orbit",
+        image: "/images/list.png",
+        tag: "List mode",
+      },
+    ],
+  },
 ];
 
 export default function GalleryPage() {
