@@ -76,25 +76,32 @@ export default function HomePage() {
           if (future) setFutureItems(future);
 
           if (projects && projects.length > 0) {
-            // No more hardcoded title checks. 
-            // We use the slug directly from Supabase.
             const dbMapped = projects.map(project => ({
               ...project,
-              slug: project.slug // Trusts the DB source of truth
+              slug: project.slug
             }));
-            const hasAltar = dbMapped.some(
-              (project) => project.slug === "altar" || project.title?.toLowerCase() === "altar"
+            let curated = [...dbMapped];
+            const orbitIdx = curated.findIndex(
+              (p) => p.slug === "orbit" || p.title?.toLowerCase() === "orbit"
             );
-            const curatedProjects = hasAltar
-              ? dbMapped
-              : [altarProject, ...dbMapped].slice(0, 3);
+            if (orbitIdx === -1) {
+              curated = [orbitProject, ...curated];
+            } else if (orbitIdx > 0) {
+              const [orbitRow] = curated.splice(orbitIdx, 1);
+              curated = [orbitRow, ...curated];
+            }
+            const hasAltar = curated.some(
+              (p) => p.slug === "altar" || p.title?.toLowerCase() === "altar"
+            );
+            if (!hasAltar)
+              curated.splice(1, 0, altarProject);
 
-            setDisplayItems(curatedProjects);
+            setDisplayItems(curated.slice(0, 3));
           } else {
             setDisplayItems([
+              orbitProject,
               altarProject,
               { id: '1', title: "Mustafa.ai (v1.0)", type: "Full-Stack", status: "Completed", slug: "mustafa-ai" },
-              { id: '2', title: "QuickBooks IES Suite", type: "Automation", status: "Completed", slug: "quickbooks" }
             ]);
           }
 

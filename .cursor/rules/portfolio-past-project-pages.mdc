@@ -1,0 +1,48 @@
+---
+description: Past project deep-dives under app/past/*/page.tsx — layout, sections, and hub colors.
+globs: app/past/**/page.tsx
+alwaysApply: false
+---
+
+# Portfolio `/past` project pages
+
+## Required sections (in order)
+
+Every **project deep-dive** (`app/past/<slug>/page.tsx`) must include:
+
+1. **Header** — Eyebrow badge, title, primary actions: **View source** (GitHub), **Live** (external), **View Gallery** (`<Link href="/gallery">` with orange `ImageIcon`, matching Altar / other pages).
+
+2. **The Discovery** — Section heading with `Search` icon; lead copy explaining the problem space / insight.
+
+3. **The Purpose** — Sidebar-style card (right column on md+) with `Sparkles` icon and short italic purpose statement.
+
+4. **Quote** — Pull-quote block with `MessageSquareQuote` inside the Discovery column (same pattern as Altar).
+
+5. **The Friction** — Card with `ShieldAlert`; what was wrong with status quo.
+
+6. **The Solve** — Card with `Zap`; what you built / how it addresses friction.
+
+7. **Technical Snapshot** — `Terminal` icon + heading; grid of label/value pairs (stack, deploy, core loop, etc.).
+
+8. **Footer** — “End of Transmission” strip (optional but consistent on completed pages).
+
+Match spacing and Tailwind patterns from `app/past/altar/page.tsx` unless there is a deliberate redesign.
+
+## `/past` hub (`app/past/page.tsx`) accent colors
+
+Assign **one Tailwind hue per project** for folder icon + hover arrow. **Do not reuse** an existing project’s hue.
+
+Current reservation:
+
+| Project      | Hue     | Classes (example)                    |
+|-------------|---------|--------------------------------------|
+| Orbit       | emerald | `bg-emerald-500/10 text-emerald-400` |
+| Altar       | violet  | `bg-violet-500/10 text-violet-400`   |
+| Mustafa.ai  | cyan    | `bg-cyan-500/10 text-cyan-400`        |
+| QuickBooks  | blue    | `bg-blue-500/10 text-blue-400`       |
+
+For a **new** project, pick an unused hue (e.g. **rose**, **orange**, **fuchsia**, **amber**) and add a row to this rule.
+
+## Newest project on home Past pillar
+
+When adding a flagship project, ensure **`orbitProject`** (or successor) stays **first** in the Archive pillar on `app/page.tsx`: prepend or reorder so slug `orbit` is index `0` before `slice(0, 3)`, and keep fallback order aligned (`orbit` → `altar` → …).
