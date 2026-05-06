@@ -49,5 +49,6 @@ The three cards follow **recency**, not a permanent “flagship.” **Newest com
 
 The small status label on each card (bottom right) should read **`Completed`** for every project in this pillar—including shipped apps that still have a live URL—so the Archive reads consistently.
 
-- **With Supabase:** `app/page.tsx` uses whatever `projects` returns, already ordered by `created_at` descending—**do not** hardcode a slug to slot 0.
-- **Empty DB fallback:** `pastPillarFallbackByRecency` in `app/page.tsx` is a **manually maintained newest-first** list; when you ship something newer than Orbit, **put that entry first** in the array.
+- **With Supabase:** `app/page.tsx` loads up to **80** completed projects (not 3), then **`mergePastPillarProjects`** merges in **`STATIC_ARCHIVE_FILL`** rows only for **missing slugs** (`orbit`, `altar`, `mustafa-ai`). Everything is sorted by `created_at` desc and **sliced to 3**. DB rows win when the slug exists (your CMS dates matter).
+- **Empty DB:** Same merge with zero rows → static fill only.
+- **Optional DB sync:** To store Orbit/Altar in Supabase for CMS parity, use `supabase/snippets/seed_projects_archive.sql` as a template in the SQL Editor (adjust columns to your schema).

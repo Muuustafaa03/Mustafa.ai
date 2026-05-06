@@ -11,6 +11,55 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { ideaDisplayTitle } from "@/lib/marketplace";
 
+/** Used only when a slug is missing from Supabase — dates tune recency vs other rows. */
+const STATIC_ARCHIVE_FILL = [
+  {
+    id: "orbit",
+    title: "Orbit",
+    type: "Spatial Tasks",
+    status: "Completed",
+    slug: "orbit",
+    created_at: "2026-05-18T12:00:00.000Z",
+  },
+  {
+    id: "altar",
+    title: "Altar",
+    type: "Focus Ritual",
+    status: "Completed",
+    slug: "altar",
+    created_at: "2026-04-12T12:00:00.000Z",
+  },
+  {
+    id: "1",
+    title: "Mustafa.ai (v1.0)",
+    type: "Full-Stack",
+    status: "Completed",
+    slug: "mustafa-ai",
+    created_at: "2025-09-01T12:00:00.000Z",
+  },
+] as const;
+
+function mergePastPillarProjects(dbRows: Record<string, unknown>[]) {
+  type Row = (typeof STATIC_ARCHIVE_FILL)[number];
+  const map = new Map<string, Row & Record<string, unknown>>();
+  for (const raw of dbRows) {
+    const slug = typeof raw.slug === "string" ? raw.slug : "";
+    if (!slug) continue;
+    map.set(slug, { ...raw, slug } as Row & Record<string, unknown>);
+  }
+  for (const fill of STATIC_ARCHIVE_FILL) {
+    if (!map.has(fill.slug))
+      map.set(fill.slug, { ...fill });
+  }
+  const merged = [...map.values()];
+  merged.sort(
+    (a, b) =>
+      new Date(String((b as { created_at?: string }).created_at ?? 0)).getTime() -
+      new Date(String((a as { created_at?: string }).created_at ?? 0)).getTime(),
+  );
+  return merged.slice(0, 3);
+}
+
 export default function HomePage() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [futureItems, setFutureItems] = useState<any[]>([]);
@@ -63,7 +112,7 @@ export default function HomePage() {
           .select('*')
           .eq('status', 'Completed') // Strict consistency
           .order('created_at', { ascending: false })
-          .limit(3);
+          .limit(80);
 
         // ... Fetching Logs ...
         const { data: logs } = await supabase
@@ -87,8 +136,7 @@ export default function HomePage() {
               ...project,
               slug: project.slug
             }));
-            // Newest first — matches Supabase .order('created_at', { ascending: false })
-            setDisplayItems(dbMapped.slice(0, 3));
+            setDisplayItems(mergePastPillarProjects(dbMapped));
           } else {
             setDisplayItems(pastPillarFallbackByRecency);
           }
