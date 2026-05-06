@@ -43,6 +43,9 @@ Current reservation:
 
 For a **new** project, pick an unused hue (e.g. **rose**, **orange**, **fuchsia**, **amber**) and add a row to this rule.
 
-## Newest project on home Past pillar
+## Home Past pillar order (Archive)
 
-When adding a flagship project, ensure **`orbitProject`** (or successor) stays **first** in the Archive pillar on `app/page.tsx`: prepend or reorder so slug `orbit` is index `0` before `slice(0, 3)`, and keep fallback order aligned (`orbit` → `altar` → …).
+The three cards follow **recency**, not a permanent “flagship.” **Newest completed project first.**
+
+- **With Supabase:** `app/page.tsx` uses whatever `projects` returns, already ordered by `created_at` descending—**do not** hardcode a slug to slot 0.
+- **Empty DB fallback:** `pastPillarFallbackByRecency` in `app/page.tsx` is a **manually maintained newest-first** list; when you ship something newer than Orbit, **put that entry first** in the array.

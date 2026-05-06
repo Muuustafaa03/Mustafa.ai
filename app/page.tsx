@@ -36,6 +36,13 @@ export default function HomePage() {
     slug: "orbit",
   };
 
+  /** Past pillar when DB is empty: newest ship first—reorder when a newer project launches. */
+  const pastPillarFallbackByRecency = [
+    orbitProject,
+    altarProject,
+    { id: '1', title: "Mustafa.ai (v1.0)", type: "Full-Stack", status: "Completed", slug: "mustafa-ai" },
+  ];
+
   useEffect(() => {
     let isMounted = true;
 
@@ -80,29 +87,10 @@ export default function HomePage() {
               ...project,
               slug: project.slug
             }));
-            let curated = [...dbMapped];
-            const orbitIdx = curated.findIndex(
-              (p) => p.slug === "orbit" || p.title?.toLowerCase() === "orbit"
-            );
-            if (orbitIdx === -1) {
-              curated = [orbitProject, ...curated];
-            } else if (orbitIdx > 0) {
-              const [orbitRow] = curated.splice(orbitIdx, 1);
-              curated = [orbitRow, ...curated];
-            }
-            const hasAltar = curated.some(
-              (p) => p.slug === "altar" || p.title?.toLowerCase() === "altar"
-            );
-            if (!hasAltar)
-              curated.splice(1, 0, altarProject);
-
-            setDisplayItems(curated.slice(0, 3));
+            // Newest first — matches Supabase .order('created_at', { ascending: false })
+            setDisplayItems(dbMapped.slice(0, 3));
           } else {
-            setDisplayItems([
-              orbitProject,
-              altarProject,
-              { id: '1', title: "Mustafa.ai (v1.0)", type: "Full-Stack", status: "Completed", slug: "mustafa-ai" },
-            ]);
+            setDisplayItems(pastPillarFallbackByRecency);
           }
 
           if (logs) setPresentLogs(logs);
