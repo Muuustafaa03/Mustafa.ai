@@ -196,9 +196,7 @@ export default function HomePage() {
             <p className="text-neutral-500 text-xl lg:text-2xl max-w-2xl leading-relaxed mb-12 font-medium text-left">
               <span className="font-semibold text-white">Product builder</span>
               {" — "}I ship{" "}
-              <span className="font-semibold text-white">spatial, intentional interfaces</span>
-              {" "}and the systems behind them,{" "}
-              <span className="font-semibold text-white">in public</span>.
+              <span className="font-semibold text-white">spatial, intentional interfaces</span>.
             </p>
 
             <nav className="flex flex-wrap gap-3">
