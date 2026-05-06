@@ -1,48 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ArrowUpRight, Image as ImageIcon, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const gallerySections = [
+/** Higher = added / updated more recently. Bump when you add screenshots so newest surfaces first. */
+type GalleryItem = {
+  title: string;
+  description: string;
+  projectLink: string;
+  image: string;
+  tag: string;
+  sortRank: number;
+};
+
+type GallerySection = { title: string; items: GalleryItem[] };
+
+const gallerySectionsRaw: GallerySection[] = [
   {
     title: "Archive Systems",
     items: [
       {
         title: "QuickBooks IES Auditor",
-        description: "The core Streamlit interface used to validate 41-character constraints across thousands of rows.",
+        description:
+          "The core Streamlit interface used to validate 41-character constraints across thousands of rows.",
         projectLink: "/past/quickbooks",
         image: "/images/qb-auditor-main.png",
-        tag: "Tool Interface"
+        tag: "Tool Interface",
+        sortRank: 1,
       },
       {
         title: "Hidden Terminal Interface",
-        description: "A functional command-line overlay built into the portfolio for updating portfolio in real time.",
+        description:
+          "A functional command-line overlay built into the portfolio for updating portfolio in real time.",
         projectLink: "/past/mustafa-ai",
         image: "/images/terminal-screenshot.png",
-        tag: "System Core"
+        tag: "System Core",
+        sortRank: 2,
       },
-    ]
+    ],
   },
   {
     title: "Altar",
     items: [
       {
         title: "Altar Home Ritual",
-        description: "Primary ritual setup screen where users choose what to sacrifice and for how long.",
+        description:
+          "Primary ritual setup screen where users choose what to sacrifice and for how long.",
         projectLink: "/past/altar",
         image: "/images/altarhome.png",
-        tag: "Ritual Setup"
+        tag: "Ritual Setup",
+        sortRank: 3,
       },
       {
         title: "Altar Active Session",
-        description: "In-session focus state visualizing the active sacrifice in a minimal immersive interface.",
+        description:
+          "In-session focus state visualizing the active sacrifice in a minimal immersive interface.",
         projectLink: "/past/altar",
         image: "/images/altaractive.png",
-        tag: "Focus State"
+        tag: "Focus State",
+        sortRank: 4,
       },
-    ]
+    ],
   },
   {
     title: "Orbit",
@@ -54,6 +74,7 @@ const gallerySections = [
         projectLink: "/past/orbit",
         image: "/images/constellation.png",
         tag: "3D board",
+        sortRank: 5,
       },
       {
         title: "List view",
@@ -62,13 +83,30 @@ const gallerySections = [
         projectLink: "/past/orbit",
         image: "/images/list.png",
         tag: "List mode",
+        sortRank: 6,
       },
     ],
   },
 ];
 
+function buildGallerySectionsOrdered(raw: GallerySection[]): GallerySection[] {
+  return [...raw]
+    .map((section) => {
+      const items = [...section.items].sort((a, b) => b.sortRank - a.sortRank);
+      const maxRank = Math.max(...items.map((i) => i.sortRank), 0);
+      return { section: { ...section, items }, maxRank };
+    })
+    .sort((a, b) => b.maxRank - a.maxRank)
+    .map(({ section }) => section);
+}
+
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const gallerySections = useMemo(
+    () => buildGallerySectionsOrdered(gallerySectionsRaw),
+    [],
+  );
 
   return (
     <main className="relative min-h-screen bg-black text-white p-6 lg:p-24 selection:bg-orange-500/30">
@@ -112,7 +150,9 @@ export default function GalleryPage() {
           </div>
           <h1 className="text-6xl font-bold tracking-tighter mb-4 text-white text-left">The Gallery</h1>
           <p className="text-neutral-500 text-lg leading-relaxed italic text-left">
-            Visual proof of logic, interfaces, and architecture. Click images for full view.
+            Visual proof of logic, interfaces, and architecture. Click images for full view. Each shot has a{" "}
+            <span className="text-neutral-400 not-italic">sortRank</span> in code—higher = newer; bump it when you add updates so
+            that section and card float to the top.
           </p>
         </header>
 
@@ -126,7 +166,7 @@ export default function GalleryPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {section.items.map((item, idx) => (
-                  <div key={`${section.title}-${idx}`} className="group flex flex-col space-y-6">
+                  <div key={`${section.title}-${item.sortRank}-${idx}`} className="group flex flex-col space-y-6">
                     <div
                       className="relative aspect-video w-full rounded-2xl border border-white/10 bg-white/5 overflow-hidden transition-all group-hover:border-orange-500/40 cursor-zoom-in"
                       onClick={() => setSelectedImage(item.image)}

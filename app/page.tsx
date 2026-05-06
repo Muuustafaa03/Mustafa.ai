@@ -402,9 +402,17 @@ export default function HomePage() {
                       <p className="text-[8px] text-neutral-500 font-mono uppercase tracking-widest">
                         ↑ {item.votes ?? 0}
                       </p>
-                      <p className="text-[8px] text-emerald-500 font-mono uppercase">
+                      <span
+                        className={`text-[8px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-widest shrink-0 ${
+                          item.status === "Completed"
+                            ? "bg-blue-500/10 text-blue-400"
+                            : item.status === "In Development"
+                              ? "bg-emerald-500/10 text-emerald-500"
+                              : "bg-yellow-500/10 text-yellow-500"
+                        }`}
+                      >
                         {item.status}
-                      </p>
+                      </span>
                     </div>
                   </div>
                 ))}
