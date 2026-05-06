@@ -28,7 +28,29 @@ export default function PastPillarHub() {
         </header>
 
         <div className="grid grid-cols-1 gap-4">
-          {/* 0. ALTAR (NEW) */}
+          {/* Orbit — spatial task canvas */}
+          <Link href="/past/orbit">
+            <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-sky-500/10 text-sky-400">
+                    <Folder size={20} />
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight text-white">Orbit</h3>
+                </div>
+                <ArrowUpRight className="text-neutral-700 group-hover:text-sky-400 transition-colors" />
+              </div>
+              <p className="text-neutral-400 text-sm max-w-2xl leading-relaxed">
+                A constellation-style task board: workflow rings, deadline-driven visuals,
+                and a calm spatial read instead of dense columns.
+              </p>
+              <div className="mt-6 flex gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                <span>React</span><span>•</span><span>Three.js</span><span>•</span><span>Vite</span>
+              </div>
+            </div>
+          </Link>
+
+          {/* 0. ALTAR */}
           <Link href="/past/altar">
             <div className="group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.07] transition-all">
               <div className="flex justify-between items-start mb-4">

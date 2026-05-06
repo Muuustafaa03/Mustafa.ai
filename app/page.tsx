@@ -28,6 +28,14 @@ export default function HomePage() {
     slug: "altar",
   };
 
+  const orbitProject = {
+    id: "orbit",
+    title: "Orbit",
+    type: "Spatial Tasks",
+    status: "Live",
+    slug: "orbit",
+  };
+
   useEffect(() => {
     let isMounted = true;
 
@@ -136,14 +144,18 @@ export default function HomePage() {
             <div className="absolute top-0 right-0 hidden lg:block text-left">
               <div className="rounded-full border border-white/10 bg-white/5 backdrop-blur px-4 py-2 flex items-center gap-3">
                 <span className="relative block h-2 w-2 rounded-full bg-emerald-400" />
-                <span className="text-[10px] font-bold text-gray-300 tracking-[0.2em] uppercase font-mono">Seattle, WA</span>
+                <span className="text-[10px] font-bold text-gray-300 tracking-[0.2em] uppercase font-mono">Kenmore, WA</span>
               </div>
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[0.9]">Mustafa Ahmed</h1>
 
-            <p className="text-neutral-500 text-xl lg:text-2xl max-w-2xl leading-relaxed mb-12 font-medium italic text-left">
-              <span className="text-white font-semibold text-nowrap">Product Builder</span> with a passion for <span className="text-white font-semibold text-nowrap">shipping in public</span> and <span className="text-white font-semibold text-nowrap">creating something from nothing</span>.
+            <p className="text-neutral-500 text-xl lg:text-2xl max-w-2xl leading-relaxed mb-12 font-medium text-left">
+              <span className="font-semibold text-white">Product builder</span>
+              {" — "}I ship{" "}
+              <span className="font-semibold text-white">spatial, intentional interfaces</span>
+              {" "}and the systems behind them,{" "}
+              <span className="font-semibold text-white">in public</span>.
             </p>
 
             <nav className="flex flex-wrap gap-3">
@@ -155,7 +167,7 @@ export default function HomePage() {
                 className="rounded-[8px] border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:text-white px-6 py-5 transition-all font-bold tracking-tight group"
               >
                 <a href="/Mustafa_Ahmed_Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                  <FileDown size={18} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
+                  <FileDown size={18} className="text-purple-400 group-hover:text-purple-300 transition-colors" />
                   Resume
                 </a>
               </Button>
