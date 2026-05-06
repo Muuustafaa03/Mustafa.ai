@@ -194,9 +194,9 @@ export default function HomePage() {
             <h1 className="text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[0.9]">Mustafa Ahmed</h1>
 
             <p className="text-neutral-500 text-xl lg:text-2xl max-w-2xl leading-relaxed mb-12 font-medium text-left">
-              <span className="font-semibold text-white">Product builder</span>
-              {" — "}I ship{" "}
-              <span className="font-semibold text-white">spatial, intentional interfaces</span>.
+              <span className="font-semibold text-white">Product Builder</span>
+              {" "}with a passion for{" "}
+              <span className="font-semibold text-white">shipping in public</span>.
             </p>
 
             <nav className="flex flex-wrap gap-3">
